@@ -1,28 +1,11 @@
-import {useState} from "react"
-import {useDispatch, useSelector} from "react-redux"
+import {useSelector} from "react-redux"
 import {Link} from "react-router-dom"
+import AddToCartForm from "./AddToCartForm"
+
 const Item = ({item, id}) => {
-    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const cartItem = cart.filter(item => item.id === id)[0]
     const itemQty = cartItem ? cartItem.qty : 0
-    const [formData, setFormData] = useState({qty: itemQty})
-    const handleChange = e => {
-        const {name, value} = e.target;
-        setFormData({[name]: value})
-    }
-
-    
-
-
-    const addToCart = () => {
-        dispatch({type: "ADD_TO_CART", payload: {id, qty: +formData.qty}})
-    }
-
-    const removeAllFromCart = () => {
-        dispatch({type: "REMOVE_ALL_FROM_CART", payload: {id}})
-        formData.qty = 0
-    }
     return (
  
         <div className="col-sm my-3">
@@ -33,9 +16,7 @@ const Item = ({item, id}) => {
                     <p className="card-text">${item.price}</p>
                     {<Link className="btn btn-sm btn-info float-start" to={`/item/${id}`}>Learn More</Link>}
                     <div className="card-footer" style={{position: "absolute", bottom: "1%"}}>
-                        <button onClick={addToCart} className="badge bg-secondary">Add to Cart</button>
-                        <input type="number" id='qty' name='qty' value={formData.qty} onChange={handleChange} style={{width: "20%"}}></input>
-                        <button onClick={removeAllFromCart} className="badge bg-secondary">Remove All</button>
+                        <AddToCartForm itemQty={itemQty} id={id} key={id}/>
                     </div>
                 </div>
                 
