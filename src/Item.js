@@ -1,5 +1,6 @@
 import {useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
+import {Link} from "react-router-dom"
 const Item = ({item, id}) => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
@@ -25,17 +26,19 @@ const Item = ({item, id}) => {
     return (
  
         <div className="col-sm my-3">
-            <div className="card" style={{width: "18rem", height: "25rem"}}>
-                <img style={{height: "55%"}}src={item.image_url} className="card-img-top" alt={item.name} />
+            <div className="card" style={{width: "18rem", height: "22rem"}}>
+                <img style={{height: "50%"}}src={item.image_url} className="card-img-top" alt={item.name} />
                 <div className="card-body">
                     <h5 className="card-title">{item.name}</h5>
-                    <p className="card-text">{item.description}</p>
+                    <p className="card-text">${item.price}</p>
+                    {<Link className="btn btn-sm btn-info float-start" to={`/item/${id}`}>Learn More</Link>}
                     <div className="card-footer" style={{position: "absolute", bottom: "1%"}}>
                         <button onClick={addToCart} className="badge bg-secondary">Add to Cart</button>
                         <input type="number" id='qty' name='qty' value={formData.qty} onChange={handleChange} style={{width: "20%"}}></input>
                         <button onClick={removeAllFromCart} className="badge bg-secondary">Remove All</button>
                     </div>
                 </div>
+                
             </div>
         </div>
     )
