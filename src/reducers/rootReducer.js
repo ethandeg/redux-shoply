@@ -1,7 +1,7 @@
 import data from "../data.json"
 
 
-const INITIAL_STATE = {catalog: data.products, cart: [{id: "4260bf52-218a-480e-87ea-4ff42470ce98", qty: 3}] }
+const INITIAL_STATE = {catalog: data.products, cart: [{id: "4260bf52-218a-480e-87ea-4ff42470ce98", qty: 3}, {id:"3fdd689a-02cc-4ae7-903b-f6d2776ff3b9", qty:2}] }
 
 function rootReducer(state=INITIAL_STATE, action) {
     switch (action.type) {
